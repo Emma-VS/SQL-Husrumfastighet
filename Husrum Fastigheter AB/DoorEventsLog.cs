@@ -19,7 +19,7 @@ namespace Husrum_Fastigheter_AB
             int input = 0;
             while (true)
             {
-                Console.WriteLine("(1) Search by door");
+                Console.WriteLine("\n(1) Search by door");
                 Console.WriteLine("(2) Search by Event");
                 Console.WriteLine("(3) Search by Location");
                 Console.WriteLine("(4) Search by Tenant");
@@ -158,15 +158,16 @@ namespace Husrum_Fastigheter_AB
 
         public void FindEntriesByLocation()
         {
-            Console.WriteLine("Enter the door code: ");
+            Console.WriteLine("Enter the location code: ");
             string input = Input_Reader();
+            input = "%" + input + "%";
             DataTable result = DataBase.Data_Fetcher(@"SELECT Logs.Date, Logs.Time, Locations.Location, Events.Event, Tag.Tag, Tenants.name
                                                        FROM Logs 
                                                        JOIN Locations on Logs.Location = Locations.ID
                                                        JOIN Events on Logs.Event = Events.ID
                                                        JOIN Tenants on Logs.Tenant = Tenants.ID
                                                        LEFT JOIN Tenants as Tag ON Logs.Tag = Tag.ID 
-                                                       WHERE Locations.Location = @Location
+                                                       WHERE Locations.Location LIKE @Location
                                                        ORDER BY Logs.time DESC
                                                        LIMIT " + Max_Enteries, new string[] { "@Location", input });
             if (result.Rows.Count == 0)
