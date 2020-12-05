@@ -11,12 +11,63 @@ namespace Husrum_Fastigheter_AB
 {
     public class DoorEventsLog
     {
-        int Max_Enteries = 2;
+        int Max_Enteries = 20;
         Database DataBase = new Database();
 
-        public void Menu()
-        { 
+        public void Start()
+        {
+            int input = 0;
+            while (true)
+            {
+                Console.WriteLine("(1) Search by door");
+                Console.WriteLine("(2) Search by Event");
+                Console.WriteLine("(3) Search by Location");
+                Console.WriteLine("(4) Search by Tenant");
+                Console.WriteLine("(5) Search by Tag");
+                Console.WriteLine("(6) Find tenants by apartment number");
+                Console.WriteLine("(7) Create database");
 
+                while (true)
+                {
+                    try
+                    {
+                        input = Convert.ToInt32(Console.ReadLine());
+                        break;
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("Invalid input");
+                    }
+                }
+
+                switch (input)
+                {
+                    case 1:
+                        FindEntriesByDoor();
+                        break;
+                    case 2:
+                        FindEntriesByEvent();
+                        break;
+                    case 3:
+                        FindEntriesByLocation();
+                        break;
+                    case 4:
+                        FindEntriesByTenant();
+                        break;
+                    case 5:
+                        FindEntriesByTag();
+                        break;
+                    case 6:
+                        ListTenantAt();
+                        break;
+                    case 7:
+                        DataBase.Create_Database();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid input");
+                        break;
+                }
+            }
         }
 
         public string Input_Reader()
