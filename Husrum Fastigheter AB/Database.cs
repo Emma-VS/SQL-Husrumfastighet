@@ -19,9 +19,9 @@ namespace Husrum_Fastigheter_AB
                 SQLiteConnection.CreateFile(@".\House.db");
 
                 SQL_Execution(@"CREATE TABLE Tenants (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Apartment TEXT, Tag TEXT);");
-                SQL_Execution(@"CREATE TABLE Doors (ID INTEGER PRIMARY KEY AUTOINCREMENT, Door TEXT);");
+                SQL_Execution(@"CREATE TABLE Locations (ID INTEGER PRIMARY KEY AUTOINCREMENT, Location TEXT);");
                 SQL_Execution(@"CREATE TABLE Events (ID INTEGER PRIMARY KEY AUTOINCREMENT, Event TEXT);");
-                SQL_Execution(@"CREATE TABLE Logs (ID INTEGER PRIMARY KEY AUTOINCREMENT, Date INTEGER NOT NULL, Time INTEGER NOT NULL, Door INTEGER NOT NULL, Tenant INTEGER NOT NULL, Event INTEGER NOT NULL);");
+                SQL_Execution(@"CREATE TABLE Logs (ID INTEGER PRIMARY KEY AUTOINCREMENT, Date INTEGER NOT NULL, Time INTEGER NOT NULL, Location INTEGER NOT NULL, Tenant INTEGER NOT NULL, Tag INTEGER NOT NULL, Event INTEGER NOT NULL);");
 
 
                 SQL_Execution(@"INSERT INTO Tenants (Name, Apartment, Tag) VALUES(@Name, @Apartment, @Tag);", new string[] { "@Name", "Liam Jönsson", "@Apartment", "0101", "@Tag", "0101A" });
@@ -47,49 +47,61 @@ namespace Husrum_Fastigheter_AB
                 SQL_Execution(@"INSERT INTO Tenants (Name, Apartment, Tag) VALUES(@Name, @Apartment, @Tag);", new string[] { "@Name", "Vaktmästare", "@Apartment", "VAKT", "@Tag", "VAKT01" });
 
 
-                SQL_Execution(@"INSERT INTO Doors (Door) VALUES(@Door);", new string[] { "@Door", "UT"});
-                SQL_Execution(@"INSERT INTO Doors (Door) VALUES(@Door);", new string[] { "@Door", "SOPRUM" });
-                SQL_Execution(@"INSERT INTO Doors (Door) VALUES(@Door);", new string[] { "@Door", "TVÄTT" });
-                SQL_Execution(@"INSERT INTO Doors (Door) VALUES(@Door);", new string[] { "@Door", "VAKT" });
-                SQL_Execution(@"INSERT INTO Doors (Door) VALUES(@Door);", new string[] { "@Door", "LGH0101" });
-                SQL_Execution(@"INSERT INTO Doors (Door) VALUES(@Door);", new string[] { "@Door", "LGH0102" });
-                SQL_Execution(@"INSERT INTO Doors (Door) VALUES(@Door);", new string[] { "@Door", "LGH0103" });
-                SQL_Execution(@"INSERT INTO Doors (Door) VALUES(@Door);", new string[] { "@Door", "LGH0201" });
-                SQL_Execution(@"INSERT INTO Doors (Door) VALUES(@Door);", new string[] { "@Door", "LGH0202" });
-                SQL_Execution(@"INSERT INTO Doors (Door) VALUES(@Door);", new string[] { "@Door", "LGH0301" });
-                SQL_Execution(@"INSERT INTO Doors (Door) VALUES(@Door);", new string[] { "@Door", "LGH0302" });
-                SQL_Execution(@"INSERT INTO Doors (Door) VALUES(@Door);", new string[] { "@Door", "BLK0101" });
-                SQL_Execution(@"INSERT INTO Doors (Door) VALUES(@Door);", new string[] { "@Door", "BLK0102" });
-                SQL_Execution(@"INSERT INTO Doors (Door) VALUES(@Door);", new string[] { "@Door", "BLK0103" });
-                SQL_Execution(@"INSERT INTO Doors (Door) VALUES(@Door);", new string[] { "@Door", "BLK0201" });
-                SQL_Execution(@"INSERT INTO Doors (Door) VALUES(@Door);", new string[] { "@Door", "BLK0202" });
-                SQL_Execution(@"INSERT INTO Doors (Door) VALUES(@Door);", new string[] { "@Door", "BLK0301" });
-                SQL_Execution(@"INSERT INTO Doors (Door) VALUES(@Door);", new string[] { "@Door", "BLK0302" });
+                SQL_Execution(@"INSERT INTO Locations (Location) VALUES(@Location);", new string[] { "@Location", "UT" });
+                SQL_Execution(@"INSERT INTO Locations (Location) VALUES(@Location);", new string[] { "@Location", "SOPRUM" });
+                SQL_Execution(@"INSERT INTO Locations (Location) VALUES(@Location);", new string[] { "@Location", "TVÄTT" });
+                SQL_Execution(@"INSERT INTO Locations (Location) VALUES(@Location);", new string[] { "@Location", "VAKT" });
+                SQL_Execution(@"INSERT INTO Locations (Location) VALUES(@Location);", new string[] { "@Location", "LGH0101" });
+                SQL_Execution(@"INSERT INTO Locations (Location) VALUES(@Location);", new string[] { "@Location", "LGH0102" });
+                SQL_Execution(@"INSERT INTO Locations (Location) VALUES(@Location);", new string[] { "@Location", "LGH0103" });
+                SQL_Execution(@"INSERT INTO Locations (Location) VALUES(@Location);", new string[] { "@Location", "LGH0201" });
+                SQL_Execution(@"INSERT INTO Locations (Location) VALUES(@Location);", new string[] { "@Location", "LGH0202" });
+                SQL_Execution(@"INSERT INTO Locations (Location) VALUES(@Location);", new string[] { "@Location", "LGH0301" });
+                SQL_Execution(@"INSERT INTO Locations (Location) VALUES(@Location);", new string[] { "@Location", "LGH0302" });
+                SQL_Execution(@"INSERT INTO Locations (Location) VALUES(@Location);", new string[] { "@Location", "BLK0101" });
+                SQL_Execution(@"INSERT INTO Locations (Location) VALUES(@Location);", new string[] { "@Location", "BLK0102" });
+                SQL_Execution(@"INSERT INTO Locations (Location) VALUES(@Location);", new string[] { "@Location", "BLK0103" });
+                SQL_Execution(@"INSERT INTO Locations (Location) VALUES(@Location);", new string[] { "@Location", "BLK0201" });
+                SQL_Execution(@"INSERT INTO Locations (Location) VALUES(@Location);", new string[] { "@Location", "BLK0202" });
+                SQL_Execution(@"INSERT INTO Locations (Location) VALUES(@Location);", new string[] { "@Location", "BLK0301" });
+                SQL_Execution(@"INSERT INTO Locations (Location) VALUES(@Location);", new string[] { "@Location", "BLK0302" });
 
                 SQL_Execution(@"INSERT INTO Events (Event) VALUES(@Event);", new string[] { "@Event", "DÖUT" });
                 SQL_Execution(@"INSERT INTO Events (Event) VALUES(@Event);", new string[] { "@Event", "DÖIN" });
                 SQL_Execution(@"INSERT INTO Events (Event) VALUES(@Event);", new string[] { "@Event", "FDIN" });
                 SQL_Execution(@"INSERT INTO Events (Event) VALUES(@Event);", new string[] { "@Event", "FDUT" });
 
-                //SQL_Execution(@"INSERT INTO Logs (Date, Time, Door, Tenant, Event) VALUES(@Date, @Time, @Door, @Tenant, @Event);", new string[] { "@Date", "", "@Time", "", "@Door", "", "@Tenant", "", "@Event", "" });
+                //SQL_Execution(@"INSERT INTO Logs (Date, Time, Location, Tenant, Tag, Event) VALUES(@Date, @Time, @Location, @Tenant, @Tag, @Event);", new string[] { "@Date", "", "@Time", "", "@Location", "", "@Tenant", "", "@Tag", "", "@Event", "" });
+                SQL_Execution(@"INSERT INTO Logs (Date, Time, Location, Tenant, Tag, Event) VALUES(@Date, @Time, @Location, @Tenant, @Tag, @Event);", new string[] { "@Date", "20201023", "@Time", "1007", "@Location", "8", "@Tenant", "7", "@Tag", "7", "@Event", "2" });
+                SQL_Execution(@"INSERT INTO Logs (Date, Time, Location, Tenant, Tag, Event) VALUES(@Date, @Time, @Location, @Tenant, @Tag, @Event);", new string[] { "@Date", "20201023", "@Time", "1008", "@Location", "8", "@Tenant", "7", "@Tag", "7", "@Event", "1" });
+                SQL_Execution(@"INSERT INTO Logs (Date, Time, Location, Tenant, Tag, Event) VALUES(@Date, @Time, @Location, @Tenant, @Tag, @Event);", new string[] { "@Date", "20201023", "@Time", "1019", "@Location", "11", "@Tenant", "17", "@Tag", "17", "@Event", "2" });
+                SQL_Execution(@"INSERT INTO Logs (Date, Time, Location, Tenant, Tag, Event) VALUES(@Date, @Time, @Location, @Tenant, @Tag, @Event);", new string[] { "@Date", "20201023", "@Time", "1019", "@Location", "8", "@Tenant", "6", "@Tag", "6", "@Event", "2" });
+                SQL_Execution(@"INSERT INTO Logs (Date, Time, Location, Tenant, Tag, Event) VALUES(@Date, @Time, @Location, @Tenant, @Tag, @Event);", new string[] { "@Date", "20201023", "@Time", "1020", "@Location", "2", "@Tenant", "17", "@Tag", "17", "@Event", "1" });
+                SQL_Execution(@"INSERT INTO Logs (Date, Time, Location, Tenant, Tag, Event) VALUES(@Date, @Time, @Location, @Tenant, @Tag, @Event);", new string[] { "@Date", "20201023", "@Time", "1020", "@Location", "1", "@Tenant", "6", "@Tag", "6", "@Event", "2" });
+                SQL_Execution(@"INSERT INTO Logs (Date, Time, Location, Tenant, Tag, Event) VALUES(@Date, @Time, @Location, @Tenant, @Tag, @Event);", new string[] { "@Date", "20201023", "@Time", "1021", "@Location", "2", "@Tenant", "17", "@Tag", "17", "@Event", "2" });
+                SQL_Execution(@"INSERT INTO Logs (Date, Time, Location, Tenant, Tag, Event) VALUES(@Date, @Time, @Location, @Tenant, @Tag, @Event);", new string[] { "@Date", "20201023", "@Time", "1022", "@Location", "10", "@Tenant", "17", "@Tag", "17", "@Event", "1" });
+                SQL_Execution(@"INSERT INTO Logs (Date, Time, Location, Tenant, Tag, Event) VALUES(@Date, @Time, @Location, @Tenant, @Tag, @Event);", new string[] { "@Date", "20201023", "@Time", "1055", "@Location", "9", "@Tenant", "10", "@Tag", "10", "@Event", "2" });
+                SQL_Execution(@"INSERT INTO Logs (Date, Time, Location, Tenant, Tag, Event) VALUES(@Date, @Time, @Location, @Tenant, @Tag, @Event);", new string[] { "@Date", "20201023", "@Time", "1056", "@Location", "9", "@Tenant", "10", "@Tag", "10", "@Event", "1" });
+                SQL_Execution(@"INSERT INTO Logs (Date, Time, Location, Tenant, Tag, Event) VALUES(@Date, @Time, @Location, @Tenant, @Tag, @Event);", new string[] { "@Date", "20201023", "@Time", "1103", "@Location", "10", "@Tenant", "16", "@Tag", "16", "@Event", "2" });
+                SQL_Execution(@"INSERT INTO Logs (Date, Time, Location, Tenant, Tag, Event) VALUES(@Date, @Time, @Location, @Tenant, @Tag, @Event);", new string[] { "@Date", "20201023", "@Time", "1104", "@Location", "10", "@Tenant", "16", "@Tag", "16", "@Event", "1" });
 
             }
         }
 
-        private void SQL_Execution(string query, string[] values)
+        public void SQL_Execution (string query, string[] values)
         {
-            using (SQLiteConnection connection = new SQLiteConnection (@"data source= .\House.db"))
+            using (SQLiteConnection connection = new SQLiteConnection(@"data source= .\House.db"))
             {
                 connection.Open();
                 SQLiteCommand command = new SQLiteCommand(query, connection);
                 for (int i = 0; i < values.Length; i += 2)
                 {
-                    command.Parameters.AddWithValue(values[i], values[i+1]);
+                    command.Parameters.AddWithValue(values[i], values[i + 1]);
                 }
                 command.ExecuteNonQuery();
             }
         }
-        private void SQL_Execution(string query)
+        public void SQL_Execution (string query)
         {
             using (SQLiteConnection connection = new SQLiteConnection(@"data source= .\House.db"))
             {
@@ -97,6 +109,23 @@ namespace Husrum_Fastigheter_AB
                 SQLiteCommand command = new SQLiteCommand(query, connection);
                 command.ExecuteNonQuery();
             }
+        }
+
+        public DataTable Data_Fetcher (string query, string[] values)
+        {
+            DataTable DataTable = new DataTable();
+            using (SQLiteConnection connection = new SQLiteConnection(@"data source= .\House.db"))
+            {
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand(query, connection);
+                for (int i = 0; i < values.Length; i += 2)
+                {
+                    command.Parameters.AddWithValue(values[i], values[i + 1]);
+                }
+                SQLiteDataAdapter DataAdapter = new SQLiteDataAdapter(command);
+                DataAdapter.Fill(DataTable);
+            }
+            return DataTable;
         }
     }
 }
