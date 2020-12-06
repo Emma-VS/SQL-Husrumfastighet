@@ -26,6 +26,7 @@ namespace Husrum_Fastigheter_AB
                 Console.WriteLine("(5) Search by Tag");
                 Console.WriteLine("(6) Find tenants by apartment number");
                 Console.WriteLine("(7) Create database");
+                Console.WriteLine("(8) Log entries");
 
                 while (true)
                 {
@@ -62,6 +63,9 @@ namespace Husrum_Fastigheter_AB
                         break;
                     case 7:
                         DataBase.Create_Database();
+                        break;
+                    case 8:
+                        LogEntry();
                         break;
                     default:
                         Console.WriteLine("Invalid input");
@@ -229,7 +233,100 @@ namespace Husrum_Fastigheter_AB
 
         public void LogEntry()
         {
-            Console.WriteLine("");
+            int Person_ID = 0;
+            int Location_ID = 0;
+            int Event_ID = 0;
+            int Date = 0;
+            int Time = 0;
+            string input;
+            Console.WriteLine("In order to log an entry start off with the date yyyymmdd");
+            while (true)
+            {
+                try
+                {
+                    Date = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid input");
+                }
+                if (Date.ToString().Count() == 8)
+                {
+                    break;
+                }
+                else
+                    Console.WriteLine("Wrong Format");
+            }
+
+            Console.WriteLine("Enter time hhmm, use military system");
+            while (true)
+            {
+                try
+                {
+                    Time = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid input");
+                }
+                if (Time.ToString().Count() == 4)
+                {
+                    break;
+                }
+                else
+                    Console.WriteLine("Wrong Format");
+            }
+
+            Console.WriteLine("Enter tag code");
+            while (true) 
+            {
+                input = Input_Reader();
+                DataTable result = DataBase.Data_Fetcher(@"SELECT * FROM Tenants 
+                                                     WHERE Tenants.Tag = @Tag", new string[] { "@Tag", input });
+                if (result.Rows.Count != 0)
+                {
+                    foreach (DataRow x in result.Rows)
+                        Person_ID = Convert.ToInt32(x["ID"]);
+                    break;
+                }
+                else
+                    Console.WriteLine("Invalid tag code");
+            }
+
+            Console.WriteLine("Enter door code");
+            while (true)
+            {
+                input = Input_Reader();
+                DataTable result = DataBase.Data_Fetcher(@"SELECT * FROM Locations 
+                                                     WHERE Locations.Location = @Location", new string[] { "@Location", input });
+                if (result.Rows.Count != 0)
+                {
+                    foreach (DataRow x in result.Rows)
+                        Location_ID = Convert.ToInt32(x["ID"]);
+                    break;
+                }
+                else
+                    Console.WriteLine("Invalid door code");
+            }
+
+            Console.WriteLine("Enter event code");
+            while (true)
+            {
+                input = Input_Reader();
+                DataTable result = DataBase.Data_Fetcher(@"SELECT * FROM Events 
+                                                     WHERE Events.Event = @Event", new string[] { "@Event", input });
+                if (result.Rows.Count != 0)
+                {
+                    foreach (DataRow x in result.Rows)
+                        Event_ID = Convert.ToInt32(x["ID"]);
+                    break;
+                }
+                else
+                    Console.WriteLine("Invalid event code");
+            }
+
+            //Console.WriteLine( "{0}\t{1}\t{2}\t{3}\t{4}", Date, Time,  Person_ID, Location_ID, Event_ID );
+            DataBase.SQL_Execution(@"INSERT INTO Logs (Date, Time, Location, Tenant, Tag, Event) VALUES(@Date, @Time, @Location, @Tenant, @Tag, @Event);", new string[] { "@Date", Date.ToString(), "@Time", Time.ToString(), "@Location", Location_ID.ToString(), "@Tenant", Person_ID.ToString(), "@Tag", Person_ID.ToString(), "@Event", Event_ID.ToString() });
         }
 
 
