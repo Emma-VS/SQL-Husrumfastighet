@@ -13,8 +13,9 @@ namespace Husrum_Fastigheter_AB
     {
         static void Main(string[] args)
         {
-            DoorEventsLog motor = new DoorEventsLog();
-            motor.Start();
+            Interactive motor = new Interactive();
+            motor.Test_To_See();
+            Console.ReadKey();
         }
     }
 }

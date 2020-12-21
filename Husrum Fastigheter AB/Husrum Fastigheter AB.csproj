@@ -62,8 +62,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateDatabase.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DoorEventsLog.cs" />
+    <Compile Include="Interactive.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
