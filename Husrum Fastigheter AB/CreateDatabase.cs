@@ -14,7 +14,7 @@ namespace Husrum_Fastigheter_AB
         public void Create_Database()
         {
             FileInfo file = new FileInfo(@".\House.db");
-            if (!file.Exists)
+            if (file.Length is 0)
             {
                 SQLiteConnection.CreateFile(@".\House.db");
 
